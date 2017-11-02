@@ -1,9 +1,7 @@
 package org.fsy.compile.core;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Fu编程语言编译器
@@ -19,11 +17,18 @@ public class FuCompile {
 
     private final  String DEFAULT_WORKDIR = "~";
 
+    //系统关键词列表
+    private static final List<String> keywordList = new ArrayList<>();
+
+    //常量列表
+    private static final List<String> constantList = new ArrayList<>();
 
     Map<String,String> variableMap = new HashMap<>();
 
     //脚本环境初始化
     static{
+        //关键词初始化
+        keywordList.add("print");
         //每个关键词的通用结构
         // 词 值 词类型  (0就是无绑定值)
         // 例如 print 0 function
@@ -39,8 +44,28 @@ public class FuCompile {
             while((sb = br.readLine()) != null){
                 //打印
                 //移除头尾的空格并把多个空格变为一个空格
+                sb = removeBlank(sb);
+
+                //按空格分割的单词组
+                String [] tokens = sb.split(" ");
+                //系统关键词不处理
+                for(int i= 0;i<tokens.length;i++){
+                    String currentToken = tokens[i];
+
+                    //系统关键词略过
+                    if(keywordList.contains(currentToken)){
+                        continue;
+                    }else{
+                        //
+
+
+                    }
+                }
+
+
                 if(sb.startsWith("print")){
                     //print a  打印 a
+
                 }
             }
         } catch (FileNotFoundException e) {
