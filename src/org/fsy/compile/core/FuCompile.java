@@ -11,6 +11,7 @@ import java.util.Optional;
  *
  * 包含的语言特性:
  * 脚本语言 逐行执行
+ * 非面向对象 面向过程
  * 打印
  * Created by fushiyong on 2017/11/1.
  */
@@ -21,6 +22,15 @@ public class FuCompile {
 
     Map<String,String> variableMap = new HashMap<>();
 
+    //脚本环境初始化
+    static{
+        //每个关键词的通用结构
+        // 词 值 词类型  (0就是无绑定值)
+        // 例如 print 0 function
+        // 例如 a     13 variable
+        // 或者 按词的类型 分别建立映射表 functionMap variableMap
+        //词法扫描需要有穷机 识别一个输入 是否是单词 还是函数
+    }
     public FuCompile(String filePath){
 
         try {
@@ -29,7 +39,7 @@ public class FuCompile {
             while((sb = br.readLine()) != null){
                 //打印
                 //移除头尾的空格并把多个空格变为一个空格
-                if(sb.contains("print")){
+                if(sb.startsWith("print")){
                     //print a  打印 a
                 }
             }
